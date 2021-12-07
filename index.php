@@ -11,31 +11,30 @@
 </head>
 
 <body>
-
-    <button id="btnBack"> back </button>
-
-    <div id="main">
+<!-- ปุ่มback -->
+    <button id="backpull"> back </button>
+<!-- หัวตาราง -->
+    <div id="Core">
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Author</th>
+                    <th>Details</th>
                 </tr>
             </thead>
-            <tbody id="tblPost">
+            <tbody id="ttag">
             </tbody>
         </table>
     </div>
 
-
-    <div id="detail">
+    <div id="plot">
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>UserID</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody id="tblDetails">
@@ -43,27 +42,20 @@
         </table>
     </div>
 
-
 </body>
 
-
 <script>
-
-    function refresh() {
-        
-    }
-
+    function refresh() {}
+//ดึงหรือซ่อน
     function showDetails(id) {
-        $("#main").hide();
-        $("#detail").show();
-
-        // console.log(id);
+        $("#Core").hide();
+        $("#plot").show();
         var url = "https://jsonplaceholder.typicode.com/posts/" + id
 
         $.getJSON(url)
             .done((data) => {
                 console.log(data);
-                var line = "<tr id='detailROW'";
+                var line = "<tr id='Detailtab'";
                     line += "><td>" + data.id + "</td>"
                     line += "<td><b>" + data.title + "</b><br/>"
                     line += data.body + "</td>"
@@ -74,41 +66,35 @@
             .fail((xhr, err, status) => {
 
             })
-
-
     }
 
     function LoadPosts() {
         var url = "https://jsonplaceholder.typicode.com/posts"
-
         $.getJSON(url)
             .done((data) => {
                 $.each(data, (k, item) => {
-                    // console.log(item);
                     var line = "<tr>";
                     line += "<td>" + item.id + "</td>"
                     line += "<td><b>" + item.title + "</b><br/>"
                     line += item.body + "</td>"
                     line += "<td><button onClick='showDetails(" + item.id + ");'>Link</button></td>"
                     line += "</tr>";
-                    $("#tblPost").append(line);
+                    $("#ttag").append(line);
                 });
-                $("#main").show();
+                $("#Core").show();
             })
             .fail((xhr, err, status) => {
-
             })
-    }
+        }
 
     $(() => {
         LoadPosts();
-        $("#detail").hide();
-        $("#btnBack").click(() => {
-            $("#main").show();
-            $("#detail").hide();
-            $("#detailROW").remove();
-        });
+        $("#plot").hide();
+            $("#backpull").click(() => {
+                $("#Core").show();
+                $("#plot").hide();
+                $("#Detailtab").remove();
+            });
     })
 </script>
-
 </html>
