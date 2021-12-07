@@ -20,7 +20,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Author</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody id="ttag">
